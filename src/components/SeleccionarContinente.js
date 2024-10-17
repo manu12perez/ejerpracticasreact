@@ -17,25 +17,26 @@ export default class SeleccionarContinente extends Component {
     let continenteSeleccionado = this.selectContinente.current.value;
     let request = "v3.1/region/" + continenteSeleccionado;
     let urlContientes = this.url + request;
-    axios.get(urlContientes).then(response => {
-        console.log(response.data);
-        this.setState({
-            paises: response.data
-        })
-    })
-
-  }
+    axios.get(urlContientes).then((response) => {
+      console.log(response.data);
+      this.setState({
+        paises: response.data,
+      });
+    });
+  };
 
   loadPaises = () => {
     console.log("Antes del servicio");
     var request = "v3.1/all";
-    var urlPaises = this.url + request
+    var urlPaises = this.url + request;
 
     axios.get(urlPaises).then((response) => {
       console.log("Leyendo servicio");
       let paises = response.data;
       //crea un array de regiones únicas a partir de los objetos de país en response.data, eliminando duplicados utilizando un Set
-      let contienteSinRepetir = [...new Set(response.data.map(pais => pais.region))];
+      let contienteSinRepetir = [
+        ...new Set(response.data.map((pais) => pais.region)),
+      ];
 
       console.log(response.data);
       this.setState({
@@ -43,7 +44,7 @@ export default class SeleccionarContinente extends Component {
         continentes: contienteSinRepetir,
       });
     });
-    console.log("Depués del servicio")
+    console.log("Depués del servicio");
   };
 
   componentDidMount = () => {
@@ -55,31 +56,29 @@ export default class SeleccionarContinente extends Component {
       <div>
         <h1>Seleccionar Continente</h1>
         <form>
-            <label>Seleccione Continente</label>
-            <select ref={this.selectContinente}>
-                {
-                    this.state.continentes.map((continente, index) => {
-                        return(
-                            <option key={index} value={continente}>
-                                {continente}
-                            </option>
-                        )
-                    })
-                }
-            </select>
+          <label>Seleccione Continente</label>
+          <select ref={this.selectContinente}>
+            {this.state.continentes.map((continente, index) => {
+              return (
+                <option key={index} value={continente}>
+                  {continente}
+                </option>
+              );
+            })}
+          </select>
         </form>
         <button onClick={this.buscarPaises}>Buscar paises</button>
         <br />
-        {
-           this.state.paises.map((pais,index) => {
-            return(
-                <div key={index}>
-                    <img src={pais.flags.png} style={{height:"200px", width:"200px"}}/> - {pais.name.common}
-                    <hr />
-                </div>
-            )
-           })
-        }
+        {this.state.paises.map((pais, index) => {
+          return (
+            <div key={index}>
+              <a href="/pais">
+                <img src={pais.flags.png} style={{ height: "200px", width: "200px" }}/> - {pais.name.common}
+              </a>
+              <hr />
+            </div>
+          );
+        })}
       </div>
     );
   }

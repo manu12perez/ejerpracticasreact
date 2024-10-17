@@ -4,11 +4,12 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import ServiceCountries from './components/ServiceCountries';
 import SeleccionarContinente from './components/SeleccionarContinente';
+import Router from './components/Router';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   
-    <SeleccionarContinente />
+    <Router />
   
 );
 
