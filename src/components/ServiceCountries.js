@@ -63,7 +63,7 @@ export default class ServiceCountries extends Component {
                 <ul key={index}>
                   <li>Capital: {pais.capital} </li>
                   <li>Region: {pais.continents}</li>
-                  <li>Imagen: <img src={pais.flags.png} style={{height:"200px", width:"200px"}}/></li>
+                  <li>Bandera: <img src={pais.flags.png} style={{height:"200px", width:"200px"}}/></li>
                 </ul>
               );
             }
